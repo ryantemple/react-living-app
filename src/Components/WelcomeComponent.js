@@ -39,29 +39,25 @@ let details_button = {
 }
 
 class WelcomeComponent extends React.Component {
+    constructor () {
+        super();
 
-	constructor () {
-		super();
+        this.state = { openDetails: false};
+    }
 
-		this.state = { openDetails: false};
-
-		this.openDetails = this.openDetails.bind(this);
-		this.closeDetails = this.closeDetails.bind(this);
-	}
-
-	openDetails () {
+    openDetails = () => {
 		this.setState({	
 			openDetails: true 
 		});
-	}
+	};
 
-	closeDetails () {
+    closeDetails = () => {
 		this.setState({
 			openDetails: false
 		});
-	}
+	};
 
-	render () {
+    render () {
 		return (
 			<div style={inherit_height}>
 				{(!this.state.openDetails) && <div className="aligner">

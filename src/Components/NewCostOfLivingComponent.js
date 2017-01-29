@@ -139,11 +139,10 @@ let super_script = {
 }
 
 class NewCostOfLivingComponent extends React.Component {
+    constructor (props) {
+        super(props);
 
-	constructor (props) {
-		super(props);
-
-		if (this.props.newCitySlug) {		
+        if (this.props.newCitySlug) {		
 			this.state = {
 				bannerImage: '',
 				bannerIntro: '',
@@ -152,11 +151,9 @@ class NewCostOfLivingComponent extends React.Component {
 				salary: ''
 			}
 		}
+    }
 
-		this.changePosition = this.changePosition.bind(this);
-	}
-
-	componentDidMount () {
+    componentDidMount () {
 		if (this.props.newCitySlug) {
 			fetch('https://api.teleport.org/api/urban_areas/slug:'+this.props.newCitySlug+'/images/')
 	          .then((response) => {
@@ -221,7 +218,7 @@ class NewCostOfLivingComponent extends React.Component {
 	    }
 	}
 
-	changePosition () {
+    changePosition = () => {
 		let randomObject = this.state.listOfSalaries.salaries[Math.floor(Math.random()*this.state.listOfSalaries.salaries.length)];
 		let randomPosition = randomObject.job.title;
 		let randomSalary = randomObject.salary_percentiles.percentile_50;
@@ -231,9 +228,9 @@ class NewCostOfLivingComponent extends React.Component {
 			position: randomPosition,
 			salary: roundedRandomSalary
 		})
-	}
+	};
 
-	render () {
+    render () {
 		let rentPercentChange;
 		let rent_increase_format;
 		let groceriesPercentChange;

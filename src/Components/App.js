@@ -5,7 +5,6 @@ import CityDropDownComponent from './CityDropDownComponent.js'
 import NewCostOfLivingComponent from './NewCostOfLivingComponent.js'
 
 class App extends React.Component {
-
   constructor () {
     super();
 
@@ -22,30 +21,21 @@ class App extends React.Component {
       restaurantPercentChange: 0,
       purchasingPercentChange: 0
     };
-
-    this.handleCurrentCostOfLivingInput = this.handleCurrentCostOfLivingInput.bind(this);
-    this.handleCurrencyType = this.handleCurrencyType.bind(this);
-    this.handleCurrentCity = this.handleCurrentCity.bind(this);
-    this.handleNewCity = this.handleNewCity.bind(this);
-    this.calculateNewCostOfLivingAndNextStep = this.calculateNewCostOfLivingAndNextStep.bind(this);
-    this.nextStep = this.nextStep.bind(this);
-    this.previousStep = this.previousStep.bind(this);
-    this.resetToFirstStep = this.resetToFirstStep.bind(this);
   }
 
-  handleCurrentCostOfLivingInput (e) {
+  handleCurrentCostOfLivingInput = e => {
     this.setState({
       currentCostOfLiving: e.target.value
     });
-  }
+  };
 
-  handleCurrencyType (e) {
+  handleCurrencyType = e => {
     this.setState({
       currencyType: e.target.value
     })
-  }
+  };
 
-  handleCurrentCity (e) {
+  handleCurrentCity = e => {
     let currencyType;
     const dataSet = require('../data/cost_of_living_indices.json');
 
@@ -57,15 +47,15 @@ class App extends React.Component {
       currentCity: e,
       currencyType: currencyType
     });
-  }
+  };
 
-  handleNewCity (e) {
+  handleNewCity = e => {
     this.setState({
       newCity: e
     });
-  }
+  };
 
-  calculateNewCostOfLivingAndNextStep () {
+  calculateNewCostOfLivingAndNextStep = () => {
     const currentCostOfLiving = Number(this.state.currentCostOfLiving);
     const currentCity = this.state.currentCity;
     const newCity = this.state.newCity;
@@ -100,23 +90,23 @@ class App extends React.Component {
     });
 
     this.nextStep();
-  }
+  };
 
-  nextStep () {
+  nextStep = () => {
     this.setState({
       step: this.state.step + 1 
     });
-  }
+  };
 
-  previousStep () {
+  previousStep = () => {
     this.setState({
       step: this.state.step > 2
         ? this.state.step - 1
         : 1
     });
-  }
+  };
 
-  resetToFirstStep () {
+  resetToFirstStep = () => {
     this.setState({
       step: 1,
       currentCostOfLiving: '',
@@ -130,7 +120,7 @@ class App extends React.Component {
       restaurantPercentChange: 0,
       purchasingPercentChange: 0
     })
-  }
+  };
 
   render () {
     switch (this.state.step) {

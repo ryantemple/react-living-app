@@ -49,17 +49,13 @@ let hidden_text = {
 }
 
 class CityDropDownComponent extends React.Component {
+    constructor(props) {
+        super(props);
 
-	constructor(props) {
-		super(props);
-		this.getSelectedFromProps = this.getSelectedFromProps.bind(this);
+        this.state = {selected: this.getSelectedFromProps(this.props)};
+    }
 
-		this.state = {selected: this.getSelectedFromProps(this.props)};
-		this.checkIfCityExists = this.checkIfCityExists.bind(this);
-
-	}
-
-	getSelectedFromProps(props) {
+    getSelectedFromProps = props => {
 		var selected
 		if (props.value === null && props.option.length !== 0) {
 			selected = props.options[0][props.valueField];
@@ -67,19 +63,19 @@ class CityDropDownComponent extends React.Component {
 			selected = props.value;
 		}
 		return selected;
-	}
+	};
 
-	componentWillReceiveProps(props) {
+    componentWillReceiveProps(props) {
 		const selected = this.getSelectedFromProps(props);
 		this.setState({selected: selected});
 	}
 
-	checkIfCityExists () {
+    checkIfCityExists = () => {
 		const dataSet = require('../data/cost_of_living_indices.json');
 		return (dataSet[(this.state.selected)] !== undefined);
-	}
+	};
 
-	render () {
+    render () {
 		return (
 			<div className="aligner">
 				<div style={menu_button_container}>
